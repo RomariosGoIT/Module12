@@ -15,25 +15,13 @@ const spinner = document.querySelector('.spinner-overlay');
 const persistedPhotos = storage.get()
 const fetchedPhotos = persistedPhotos ? persistedPhotos : [];
 
-console.log(fetchedPhotos);
-
 const murkup = fetchPhotos(fetchedPhotos);
-
 updateGrid(murkup)
 
-function fetchPhotos(data) {
-    return data.reduce((markup, photos) => markup + articleTlp(photos), '')
-}
 
-function updateGrid (markup) {
-    grid.innerHTML += markup;
-}
-
-
-function createImg(photos) {
+function createImg (photos) {
     grid.innerHTML = '';
-    photos.hits.forEach(cont => {
-
+    photos.forEach(cont => {
         let content = articleTlp(cont);
         return grid.innerHTML += content;
     })
@@ -44,8 +32,8 @@ const submitForm = event => {
     spinnerToggle()
 
     fetchImage(input.value, 18).then(photos => {
-
-        fetchedPhotos.push(...photos.hits);
+        console.log(photos)
+        fetchedPhotos.push(...photos);
         storage.set(fetchedPhotos)
         createImg(photos);
         spinnerToggle();
@@ -57,6 +45,17 @@ const submitForm = event => {
 form.addEventListener('submit', submitForm)
 
 
-const spinnerToggle = () => {
+//================  helpers
+
+
+function fetchPhotos(data) {
+    return data.reduce((markup, photos) => markup + articleTlp(photos), '')
+}
+
+function updateGrid(markup) {
+    grid.innerHTML += markup;
+}
+
+function spinnerToggle () {
     spinner.classList.toggle('visible')
 }
