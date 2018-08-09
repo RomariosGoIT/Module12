@@ -6,6 +6,6 @@ export const fetchImage = (query, count) => {
     return  axios
     .get(url)
     .then(res => res.data.hits)
-    .catch(err => console.log('axios err:', err))
+    .catch(err => console.log('axios err:', url))
     
 }
