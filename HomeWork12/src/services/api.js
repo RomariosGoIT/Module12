@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-export const fetchImage = (query, count) => {
-    const url = `https://pixabay.com/api/?key=9464143-b7cbb21d169259e439c99d06c&q=${query}&image_type=photo&per_page=${count}`
+const exp = axios.get('http://api.linkpreview.net/?key=123456&q=https://www.google.com')
+.then(res => console.log(res))
+
+export const fetchImage = (query) => {
+    const url = `http://api.linkpreview.net/?key=5b7329e7931e20fe313d546811bb81f26d7fb26e98c56&q=https://${query}`
 
     return  axios
     .get(url)
-    .then(res => res.data.hits)
-    .catch(err => console.log('axios err:', url))
+    .then(res => res.data)
+    .catch(err => console.log('axios err:', err))
     
 }

@@ -20,21 +20,21 @@ updateGrid(murkup)
 
 
 function createImg (photos) {
-    grid.innerHTML = '';
-    photos.forEach(cont => {
-        let content = articleTlp(cont);
+    console.log('createImg:', photos)
+    
+        let content = articleTlp(photos);
         return grid.innerHTML += content;
-    })
+   
 }
 
 const submitForm = event => {
     event.preventDefault()
     spinnerToggle()
 
-    fetchImage(input.value, 18).then(photos => {
+    fetchImage(input.value).then(photos => {
         console.log(photos)
-        fetchedPhotos.push(...photos);
-        storage.set(fetchedPhotos)
+        // fetchedPhotos.push(...photos);
+        // storage.set(fetchedPhotos)
         createImg(photos);
         spinnerToggle();
     })
