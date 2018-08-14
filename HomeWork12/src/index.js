@@ -33,8 +33,8 @@ const submitForm = event => {
 
     fetchImage(input.value).then(photos => {
         console.log(photos)
-        // fetchedPhotos.push(...photos);
-        // storage.set(fetchedPhotos)
+        fetchedPhotos.push(photos);
+        storage.set(fetchedPhotos)
         createImg(photos);
         spinnerToggle();
     })
