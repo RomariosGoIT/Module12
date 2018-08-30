@@ -12,30 +12,46 @@ const form = document.querySelector('.form')
 const input = document.querySelector('.input')
 const grid = document.querySelector('.grid')
 const spinner = document.querySelector('.spinner-overlay');
+
+const keyValue = [];
+
 const persistedPhotos = storage.get()
+
 const fetchedPhotos = persistedPhotos ? persistedPhotos : [];
 
 const murkup = fetchPhotos(fetchedPhotos);
-updateGrid(murkup)
+
+updateGrid(murkup);
+
+// function test (val) {
+
+//     val.forEach(value => {
+//         let item = localStorage.getItem(value);
+//         console.log(item)
+//         let murkup = fetchPhotos(item);
+//         return updateGrid(murkup);   
+//     })
 
 
-function createImg (photos) {
-    console.log('createImg:', photos)
-    
-        let content = articleTlp(photos);
-        return grid.innerHTML += content;
-   
+// }
+
+// test(keyValue);
+
+
+function createImg(photos) {
+    let content = articleTlp(photos);
+    return grid.insertAdjacentHTML('afterbegin', content);
+
 }
 
 const submitForm = event => {
     event.preventDefault()
     spinnerToggle()
-
     fetchImage(input.value).then(photos => {
-        console.log(photos)
-        fetchedPhotos.push(photos);
-        storage.set(fetchedPhotos)
+        fetchedPhotos.unshift(photos);        
+        storage.set(photos.url, fetchedPhotos);
         createImg(photos);
+        hendleButton();
         spinnerToggle();
     })
     event.target.reset();
@@ -53,9 +69,22 @@ function fetchPhotos(data) {
 }
 
 function updateGrid(markup) {
-    grid.innerHTML += markup;
+    grid.insertAdjacentHTML('afterbegin', markup);
 }
 
-function spinnerToggle () {
+function spinnerToggle() {
     spinner.classList.toggle('visible')
+}
+
+
+
+function hendleButton() {
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', handleDeteleBtn);
+    })
+}
+
+function handleDeteleBtn(evt) {
+    evt.target.parentNode.remove();
+    console.log('its work')
 }

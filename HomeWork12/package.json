@@ -1,12 +1,12 @@
 {
-  "name": "Webinar2",
+  "name": "HomeWork12",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack --mode development",
     "build": "webpack --mode production",
-    "start:dev": "webpack-dev-server --mode development --open"
+    "start:d": "webpack-dev-server --mode development --open"
   },
   "keywords": [],
   "author": "Romarios",

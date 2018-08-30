@@ -1,9 +1,17 @@
-export const set = value => {
-    localStorage.setItem('image-finder-app', JSON.stringify(value));
+let keyValue = '';
+
+export const set = (key, value) => {
+    keyValue = key;
+    localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const get = () => {
-    const data = localStorage.getItem('image-finder-app');
-    return data ? JSON.parse(data) : null
+export const get = (keys) => {
+    // keys.forEach(value => {localStorage.getItem(value)})
+    // const data =  localStorage.getItem(keys);
+    // return data ? JSON.parse(data) : null
    
+}
+
+export const remove = () => {
+    localStorage.removeItem('image-finder-app');
 }
